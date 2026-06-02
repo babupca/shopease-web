@@ -1,0 +1,4 @@
+{
+  "payment": { "gatewayUrl": "https://st.paygate.example/v2", "timeoutMs": 3000 },
+  "notifications": { "enabled": false }
+}

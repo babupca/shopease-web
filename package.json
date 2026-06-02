@@ -1,0 +1,33 @@
+{
+  "name": "shopease-web",
+  "version": "1.0.0",
+  "description": "ShopEase - demo e-commerce web application used as the reference project for Intelligent Test Suite Selection agents",
+  "private": true,
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "jest",
+    "test:unit": "jest tests/unit",
+    "test:api": "jest tests/api",
+    "test:e2e": "playwright test",
+    "test:report": "jest --json --outputFile=reports/jest-results.json"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.47.0",
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "<rootDir>/tests/unit/**/*.test.js",
+      "<rootDir>/tests/api/**/*.test.js"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/tests/helpers/setup.js"
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "payment": { "gatewayUrl": "https://uat.paygate.example/v2", "timeoutMs": 4000 },
+  "notifications": { "enabled": true, "fromAddress": "orders-uat@shopease.example" }
+}

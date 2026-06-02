@@ -1,0 +1,16 @@
+{
+  "app": { "name": "ShopEase", "port": 3000, "currency": "USD" },
+  "auth": { "tokenTtlMinutes": 60, "passwordMinLength": 8, "maxLoginAttempts": 5 },
+  "cart": { "maxQtyPerItem": 10, "maxDistinctItems": 25 },
+  "tax": {
+    "defaultRegion": "US-CA",
+    "rates": { "US-CA": 0.0725, "US-NY": 0.04, "US-TX": 0.0625, "US-WA": 0.065, "US-OR": 0 }
+  },
+  "shipping": { "freeShippingThreshold": 50, "flatRate": 5.99 },
+  "payment": {
+    "gatewayUrl": "https://sandbox.paygate.example/v2",
+    "timeoutMs": 3000,
+    "retry": { "maxRetries": 2, "backoffMs": 0 }
+  },
+  "notifications": { "enabled": true, "fromAddress": "orders@shopease.example" }
+}
