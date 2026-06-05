@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shop | ShopEase</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header><a class="logo" href="/" data-testid="logo">ShopEase</a><nav><a href="/" data-testid="nav-catalog">Shop</a><a href="/cart.html" data-testid="nav-cart">Cart</a><a href="/orders.html" data-testid="nav-orders">Orders</a><a href="/login.html" data-testid="nav-auth">Log in</a></nav></header>
+  <main>
+    <h1>Outdoor gear</h1>
+    <div class="toolbar">
+      <input id="search" data-testid="search-input" placeholder="Search products" aria-label="Search products">
+      <select id="category" data-testid="category-filter" aria-label="Category"><option value="">All categories</option></select>
+      <select id="sort" data-testid="sort-select" aria-label="Sort by">
+        <option value="">Featured</option><option value="price_asc">Price: low to high</option>
+        <option value="price_desc">Price: high to low</option><option value="name">Name</option>
+      </select>
+    </div>
+    <p id="message" data-testid="catalog-message" role="status"></p>
+    <div id="grid" class="grid" data-testid="product-grid"></div>
+  </main>
+  <script src="/js/api.js"></script>
+  <script src="/js/catalog.js"></script>
+</body>
+</html>
