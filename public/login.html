@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Log in | ShopEase</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header><a class="logo" href="/" data-testid="logo">ShopEase</a><nav><a href="/" data-testid="nav-catalog">Shop</a><a href="/cart.html" data-testid="nav-cart">Cart</a><a href="/orders.html" data-testid="nav-orders">Orders</a><a href="/login.html" data-testid="nav-auth">Log in</a></nav></header>
+  <main>
+    <h1>Log in</h1>
+    <form id="login-form" data-testid="login-form">
+      <div class="row"><label for="email">Email</label><input id="email" type="email" data-testid="login-email" required></div>
+      <div class="row"><label for="password">Password</label><input id="password" type="password" data-testid="login-password" required></div>
+      <button type="submit" data-testid="login-submit">Log in</button>
+      <p id="login-error" class="error" data-testid="login-error" role="alert"></p>
+    </form>
+  </main>
+  <script src="/js/api.js"></script>
+  <script src="/js/login.js"></script>
+</body>
+</html>
