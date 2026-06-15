@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cart | ShopEase</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header><a class="logo" href="/" data-testid="logo">ShopEase</a><nav><a href="/" data-testid="nav-catalog">Shop</a><a href="/cart.html" data-testid="nav-cart">Cart</a><a href="/orders.html" data-testid="nav-orders">Orders</a><a href="/login.html" data-testid="nav-auth">Log in</a></nav></header>
+  <main>
+    <h1>Your cart</h1>
+    <table data-testid="cart-table"><thead><tr><th>Product</th><th>Price</th><th>Qty</th><th>Total</th><th></th></tr></thead><tbody id="cart-body"></tbody></table>
+    <p>Subtotal: <strong id="subtotal" data-testid="cart-subtotal">$0.00</strong></p>
+    <p id="cart-message" class="error" data-testid="cart-message" role="alert"></p>
+    <a class="btn" href="/checkout.html" data-testid="go-to-checkout">Proceed to checkout</a>
+  </main>
+  <script src="/js/api.js"></script>
+  <script src="/js/cart.js"></script>
+</body>
+</html>
