@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout | ShopEase</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header><a class="logo" href="/" data-testid="logo">ShopEase</a><nav><a href="/" data-testid="nav-catalog">Shop</a><a href="/cart.html" data-testid="nav-cart">Cart</a><a href="/orders.html" data-testid="nav-orders">Orders</a><a href="/login.html" data-testid="nav-auth">Log in</a></nav></header>
+  <main>
+    <h1>Checkout</h1>
+    <form id="checkout-form" data-testid="checkout-form">
+      <div class="row"><label for="region">Tax region</label>
+        <select id="region" data-testid="checkout-region"><option>US-CA</option><option>US-NY</option><option>US-TX</option><option>US-WA</option><option>US-OR</option></select></div>
+      <div class="row"><label for="promo">Promo code</label><input id="promo" data-testid="checkout-promo"></div>
+      <div class="row"><label for="card">Card</label>
+        <select id="card" data-testid="checkout-card">
+          <option value="tok_success">Visa ending 4242</option><option value="tok_decline">Visa ending 0002 (declines)</option>
+          <option value="tok_timeout_once">Mastercard ending 5100 (slow gateway)</option><option value="tok_timeout">Amex ending 0005 (gateway down)</option>
+        </select></div>
+      <button type="button" id="quote-btn" data-testid="checkout-quote">Calculate total</button>
+      <div id="summary" data-testid="checkout-summary"></div>
+      <button type="submit" data-testid="place-order">Place order</button>
+      <button type="button" id="express-btn" data-testid="express-checkout" hidden>Express checkout</button>
+    </form>
+    <p id="checkout-result" data-testid="checkout-result" role="status"></p>
+  </main>
+  <script src="/js/api.js"></script>
+  <script src="/js/checkout.js"></script>
+</body>
+</html>
