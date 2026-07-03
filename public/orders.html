@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Orders | ShopEase</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header><a class="logo" href="/" data-testid="logo">ShopEase</a><nav><a href="/" data-testid="nav-catalog">Shop</a><a href="/cart.html" data-testid="nav-cart">Cart</a><a href="/orders.html" data-testid="nav-orders">Orders</a><a href="/login.html" data-testid="nav-auth">Log in</a></nav></header>
+  <main>
+    <h1>Your orders</h1>
+    <table data-testid="orders-table"><thead><tr><th>Order</th><th>Date</th><th>Status</th><th>Total</th><th></th></tr></thead><tbody id="orders-body"></tbody></table>
+    <p id="orders-message" data-testid="orders-message" role="status"></p>
+  </main>
+  <script src="/js/api.js"></script>
+  <script src="/js/orders.js"></script>
+</body>
+</html>
