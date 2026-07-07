@@ -1,0 +1,21 @@
+# Ownership used by the Change Intelligence Agent for owner/team mapping.
+*                                        @shopease/platform-team
+/src/services/payments/                  @shopease/payments-team
+/src/services/checkoutService.js         @shopease/checkout-team
+/src/routes/checkout.js                  @shopease/checkout-team
+/src/services/cartService.js             @shopease/checkout-team
+/src/services/promoService.js            @shopease/pricing-team
+/src/services/taxService.js              @shopease/pricing-team
+/src/utils/money.js                      @shopease/pricing-team
+/src/services/orderService.js            @shopease/orders-team
+/src/routes/orders.js                    @shopease/orders-team
+/src/routes/admin.js                     @shopease/orders-team
+/db/                                     @shopease/orders-team @shopease/dba
+/src/services/authService.js             @shopease/identity-team
+/src/middleware/auth.js                  @shopease/identity-team
+/src/services/catalogService.js          @shopease/catalog-team
+/src/services/inventoryService.js        @shopease/catalog-team
+/public/                                 @shopease/web-team
+/api/openapi.yaml                        @shopease/api-guild
+/config/                                 @shopease/platform-team @shopease/release-mgmt
+/tests/                                  @shopease/qe-team

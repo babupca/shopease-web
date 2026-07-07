@@ -1,0 +1,85 @@
+# Maps repository paths to components, business journeys and service tier.
+# Consumed by the Change Intelligence Agent (Step 4: map to components and business journeys).
+version: 1
+application: APP-SHOPEASE
+components:
+  - id: CMP-AUTH
+    name: Identity & Access
+    paths: [src/services/authService.js, src/middleware/auth.js, src/routes/auth.js, public/login.html, public/js/login.js]
+    journeys: [JRN-LOGIN]
+    tier: 1
+  - id: CMP-CATALOG
+    name: Catalog & Search
+    paths: [src/services/catalogService.js, src/routes/catalog.js, public/index.html, public/js/catalog.js]
+    journeys: [JRN-BROWSE]
+    tier: 2
+  - id: CMP-INVENTORY
+    name: Inventory
+    paths: [src/services/inventoryService.js]
+    journeys: [JRN-BROWSE, JRN-CHECKOUT]
+    tier: 1
+  - id: CMP-CART
+    name: Cart
+    paths: [src/services/cartService.js, src/routes/cart.js, public/cart.html, public/js/cart.js]
+    journeys: [JRN-CART]
+    tier: 1
+  - id: CMP-PRICING
+    name: Pricing, Promotions & Tax
+    paths: [src/services/promoService.js, src/services/taxService.js, src/utils/money.js]
+    journeys: [JRN-CHECKOUT]
+    tier: 1
+    tags: [financial]
+  - id: CMP-CHECKOUT
+    name: Checkout
+    paths: [src/services/checkoutService.js, src/routes/checkout.js, public/checkout.html, public/js/checkout.js]
+    journeys: [JRN-CHECKOUT]
+    tier: 1
+  - id: CMP-PAYMENTS
+    name: Payments
+    paths: [src/services/payments/]
+    journeys: [JRN-CHECKOUT]
+    tier: 1
+    tags: [financial, external-dependency]
+  - id: CMP-ORDERS
+    name: Orders
+    paths: [src/services/orderService.js, src/routes/orders.js, public/orders.html, public/js/orders.js, db/migrations/]
+    journeys: [JRN-ORDER-MGMT]
+    tier: 1
+  - id: CMP-ADMIN
+    name: Back-office Admin
+    paths: [src/routes/admin.js]
+    journeys: [JRN-ORDER-MGMT]
+    tier: 2
+  - id: CMP-NOTIFY
+    name: Notifications
+    paths: [src/services/notificationService.js]
+    journeys: [JRN-CHECKOUT, JRN-ORDER-MGMT]
+    tier: 3
+  - id: CMP-PROFILE
+    name: Customer Profile
+    paths: [src/services/profileService.js, src/routes/profile.js]
+    journeys: [JRN-PROFILE]
+    tier: 2
+    tags: [privacy]
+  - id: CMP-PLATFORM
+    name: Platform & Configuration
+    paths: [src/app.js, src/server.js, src/config/, config/, src/middleware/errorHandler.js, src/routes/health.js, src/errors.js, src/data/, package.json, package-lock.json]
+    journeys: [ALL]
+    tier: 1
+  - id: CMP-WEB-SHELL
+    name: Web shell & styling
+    paths: [public/css/, public/js/api.js]
+    journeys: [ALL]
+    tier: 2
+  - id: CMP-API-CONTRACT
+    name: Public API contract
+    paths: [api/openapi.yaml]
+    journeys: [ALL]
+    tier: 1
+journeys:
+  JRN-LOGIN: Customer login & session
+  JRN-BROWSE: Browse, search & filter products
+  JRN-CART: Manage cart
+  JRN-CHECKOUT: Checkout & payment authorization
+  JRN-ORDER-MGMT: Order history, cancellation & fulfilment status
+  JRN-PROFILE: Customer profile & addresses

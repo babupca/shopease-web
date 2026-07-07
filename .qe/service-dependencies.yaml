@@ -1,0 +1,25 @@
+# Upstream/downstream dependency map (Change Intelligence Step 5, Risk & Coverage Step 3).
+version: 1
+internal:
+  CMP-CHECKOUT: { dependsOn: [CMP-CART, CMP-PRICING, CMP-INVENTORY, CMP-ORDERS, CMP-PAYMENTS, CMP-NOTIFY] }
+  CMP-CART:     { dependsOn: [CMP-CATALOG, CMP-INVENTORY, CMP-PRICING] }
+  CMP-ORDERS:   { dependsOn: [CMP-NOTIFY] }
+  CMP-ADMIN:    { dependsOn: [CMP-ORDERS, CMP-AUTH] }
+  CMP-PROFILE:  { dependsOn: [CMP-AUTH, CMP-PRICING] }
+  CMP-PAYMENTS: { dependsOn: [EXT-PAYGATE] }
+  CMP-NOTIFY:   { dependsOn: [CMP-PRICING] }   # uses utils/money formatCurrency
+shared:
+  src/utils/money.js: [CMP-CART, CMP-PRICING, CMP-CHECKOUT, CMP-NOTIFY]
+  src/config/index.js: [ALL]
+  src/middleware/auth.js: [CMP-CART, CMP-CHECKOUT, CMP-ORDERS, CMP-PROFILE, CMP-ADMIN]
+external:
+  EXT-PAYGATE:
+    name: PayGate payment gateway
+    environments: { st: https://st.paygate.example/v2, sit: https://sit.paygate.example/v2, uat: https://uat.paygate.example/v2 }
+  EXT-SMTP:
+    name: Corporate SMTP relay (notifications)
+api_consumers:
+  # Who calls the public API (api/openapi.yaml). Breaking changes affect each consumer.
+  - { consumer: ShopEase web frontend, repo: shopease-web/public/js, uses: [/products, /cart, /checkout, /orders, /auth] }
+  - { consumer: ShopEase mobile app, repo: shopease-mobile, uses: [/products, /cart, /checkout, /orders, /auth] }
+  - { consumer: Fulfilment Service, repo: shopease-fulfilment, uses: [/admin/orders] }
