@@ -17,6 +17,7 @@ function listProducts({ category, search, sort, minPrice, maxPrice, page = 1, pa
   if (sort === 'price_asc') items = [...items].sort((a, b) => a.price - b.price);
   else if (sort === 'price_desc') items = [...items].sort((a, b) => b.price - a.price);
   else if (sort === 'name') items = [...items].sort((a, b) => a.name.localeCompare(b.name));
+  else if (sort === 'rating') items = [...items].sort((a, b) => b.rating - a.rating || a.price - b.price);
   else if (sort) throw new AppError(`Unsupported sort: ${sort}`, 400, 'INVALID_SORT');
 
   const size = Math.min(Math.max(1, Number(pageSize) || 10), MAX_PAGE_SIZE);
