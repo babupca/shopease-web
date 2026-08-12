@@ -35,7 +35,7 @@ paths:
       parameters:
         - { name: category, in: query, schema: { type: string } }
         - { name: search, in: query, schema: { type: string } }
-        - { name: sort, in: query, schema: { type: string, enum: [price_asc, price_desc, name] } }
+        - { name: sort, in: query, schema: { type: string, enum: [price_asc, price_desc, name, rating] } }
         - { name: minPrice, in: query, schema: { type: number } }
         - { name: maxPrice, in: query, schema: { type: number } }
         - { name: page, in: query, schema: { type: integer, minimum: 1 } }

@@ -39,7 +39,7 @@ describe('Catalog listing', () => {
   });
 
   test('[UT-CAT-010] rejects an unsupported sort option', () => {
-    expect(() => catalog.listProducts({ sort: 'rating' })).toThrow(expect.objectContaining({ code: 'INVALID_SORT' }));
+    expect(() => catalog.listProducts({ sort: 'popularity' })).toThrow(expect.objectContaining({ code: 'INVALID_SORT' }));
   });
 
   test('[UT-CAT-011] paginates results', () => {
@@ -72,5 +72,9 @@ describe('Catalog listing', () => {
 
   test('[UT-CAT-017] lists categories alphabetically', () => {
     expect(catalog.listCategories()).toEqual(['Accessories', 'Apparel', 'Footwear', 'Gear']);
+  });
+
+  test('[UT-CAT-018] sorts by rating, highest first', () => {
+    expect(catalog.listProducts({ sort: 'rating', pageSize: 50 }).items[0].id).toBe('P-1010');
   });
 });
