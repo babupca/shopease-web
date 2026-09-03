@@ -41,4 +41,16 @@ describe('Promotions', () => {
   test('[UT-PROMO-010] percent discount is rounded to cents', () => {
     expect(applyPromo('WELCOME10', 33.33).discount).toBe(3.33);
   });
+
+  test('[UT-PROMO-011] an expired promo code is rejected', () => {
+    expect(() => applyPromo('SUMMER15', 40, new Date('2026-09-01T00:00:00Z'))).toThrow(expect.objectContaining({ code: 'PROMO_EXPIRED' }));
+  });
+
+  test('[UT-PROMO-012] a promo code is valid up to the end of its expiry date', () => {
+    expect(applyPromo('SUMMER15', 40, new Date('2026-08-31T20:00:00Z')).discount).toBe(6);
+  });
+
+  test('[UT-PROMO-013] BIGSPEND20 expires after 2027', () => {
+    expect(() => applyPromo('BIGSPEND20', 400, new Date('2028-01-01T00:00:00Z'))).toThrow(expect.objectContaining({ code: 'PROMO_EXPIRED' }));
+  });
 });
