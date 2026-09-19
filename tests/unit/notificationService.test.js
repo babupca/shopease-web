@@ -29,4 +29,10 @@ describe('Notifications', () => {
       config.notifications.enabled = true;
     }
   });
+
+  test('[UT-NOTIF-005] confirmation body includes the item count and support link', () => {
+    const body = notifications.sendOrderConfirmation(user, { ...order, items: [{}, {}] }).body;
+    expect(body).toContain('2 item(s)');
+    expect(body).toContain('/support');
+  });
 });
