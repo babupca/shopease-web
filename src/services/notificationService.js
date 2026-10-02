@@ -15,7 +15,8 @@ function sendOrderConfirmation(user, order) {
     to: user.email,
     template: 'order-confirmation',
     subject: `Your ShopEase order ${order.id} is confirmed`,
-    body: `Hi ${user.name}, thanks for your order. Total charged: ${formatCurrency(order.total)}.`
+    body: `Hi ${user.name}, thanks for your order of ${(order.items || []).length} item(s). ` +
+      `Total charged: ${formatCurrency(order.total)}. Need help? Visit https://shopease.example/support`
   });
 }
 
