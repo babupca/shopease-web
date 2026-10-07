@@ -16,6 +16,7 @@ function createApp() {
   app.use('/api/orders', require('./routes/orders'));
   app.use('/api/profile', require('./routes/profile'));
   app.use('/api/admin', require('./routes/admin'));
+  app.use('/api/loyalty', require('./routes/loyalty'));
 
   if (process.env.ENABLE_TEST_HOOKS === '1') {
     // Test-only hook used by Playwright to start each test from seed data. Never enabled outside test runs.
