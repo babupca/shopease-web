@@ -2,7 +2,7 @@
 /**
  * Simulated client for the external PayGate payment gateway.
  * Card tokens drive behaviour so tests can exercise every path:
- *   tok_success | tok_decline | tok_insufficient | tok_timeout | tok_timeout_once
+ *   tok_success | tok_decline | tok_insufficient | tok_timeout | tok_timeout_once | tok_unavailable_once
  */
 const { config } = require('../../config');
 const { AppError } = require('../../errors');
@@ -36,6 +36,9 @@ async function authorize({ amount, currency = 'USD', cardToken, idempotencyKey }
       throw new GatewayError('Insufficient funds', 'CARD_DECLINED');
     case 'tok_timeout':
       throw new GatewayError(`Gateway did not respond within ${config.payment.timeoutMs}ms`, 'GATEWAY_TIMEOUT');
+    case 'tok_unavailable_once':
+      if (callCounts[idempotencyKey] === 1) throw new GatewayError('Gateway returned 503 Service Unavailable', 'GATEWAY_UNAVAILABLE');
+      break;
     case 'tok_timeout_once':
       if (callCounts[idempotencyKey] === 1) {
         throw new GatewayError(`Gateway did not respond within ${config.payment.timeoutMs}ms`, 'GATEWAY_TIMEOUT');

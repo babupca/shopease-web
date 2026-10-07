@@ -11,7 +11,7 @@ async function authorizePayment({ orderId, amount, currency = 'USD', cardToken }
     return { ...result, attempts };
   } catch (err) {
     if (err.code === 'CARD_DECLINED') throw new AppError(`Payment declined: ${err.message}`, 402, 'PAYMENT_DECLINED');
-    if (err.code === 'GATEWAY_TIMEOUT') throw new AppError('Payment gateway unavailable, please try again', 504, 'PAYMENT_TIMEOUT');
+    if (['GATEWAY_TIMEOUT', 'GATEWAY_UNAVAILABLE'].includes(err.code)) throw new AppError('Payment gateway unavailable, please try again', 504, 'PAYMENT_TIMEOUT');
     throw err;
   }
 }
