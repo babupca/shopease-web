@@ -2,7 +2,7 @@
 /** Shared money helpers used by cart, tax, promo, checkout and orders. */
 
 function round2(value) {
-  return Math.round(value * 100) / 100;
+  return Math.round((value + Number.EPSILON) * 100) / 100;
 }
 
 function sum(values) {

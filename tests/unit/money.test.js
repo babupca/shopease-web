@@ -18,4 +18,11 @@ describe('Money utilities', () => {
   test('[UT-MONEY-006] formatCurrency formats USD with grouping', () => {
     expect(formatCurrency(1234.5)).toBe('$1,234.50');
   });
+
+  test.each([
+    { id: 'UT-MONEY-007', input: 1.005, expected: 1.01 },
+    { id: 'UT-MONEY-008', input: 2.675, expected: 2.68 }
+  ])('[$id] round2 rounds half-cent values up ($input -> $expected)', ({ input, expected }) => {
+    expect(round2(input)).toBe(expected);
+  });
 });
