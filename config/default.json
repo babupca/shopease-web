@@ -10,7 +10,7 @@
   "payment": {
     "gatewayUrl": "https://sandbox.paygate.example/v2",
     "timeoutMs": 3000,
-    "retry": { "maxRetries": 2, "backoffMs": 0 }
+    "retry": { "maxRetries": 3, "backoffMs": 50, "maxBackoffMs": 400 }
   },
   "notifications": { "enabled": true, "fromAddress": "orders@shopease.example" }
 }

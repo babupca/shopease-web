@@ -1,6 +1,7 @@
 'use strict';
 const payments = require('../../src/services/payments/paymentService');
 const gateway = require('../../src/services/payments/paymentGatewayClient');
+const { config } = require('../../src/config');
 
 const order = (cardToken, orderId = 'ORD-P1') => ({ orderId, amount: 42.5, currency: 'USD', cardToken });
 
@@ -16,7 +17,7 @@ describe('Payment authorization', () => {
 
   test('[UT-PAY-003] maps a persistent timeout to PAYMENT_TIMEOUT (504)', async () => {
     await expect(payments.authorizePayment(order('tok_timeout'))).rejects.toMatchObject({ status: 504, code: 'PAYMENT_TIMEOUT' });
-    expect(gateway.callCount('ORD-P1')).toBe(3);
+    expect(gateway.callCount('ORD-P1')).toBe(config.payment.retry.maxRetries + 1);
   });
 
   test('[UT-PAY-004] maps a decline to PAYMENT_DECLINED (402) without retrying', async () => {
