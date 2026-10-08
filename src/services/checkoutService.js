@@ -10,6 +10,7 @@ const taxService = require('./taxService');
 const orderService = require('./orderService');
 const paymentService = require('./payments/paymentService');
 const notifications = require('./notificationService');
+const loyalty = require('./loyaltyService');
 
 function calculateTotals(cart, { promoCode, region }) {
   const subtotal = cart.subtotal;
@@ -66,6 +67,7 @@ async function checkout(userId, { cardToken, promoCode, region, express = false 
 
   cartService.clearCart(userId);
   notifications.sendOrderConfirmation(user, order);
+  order.pointsEarned = loyalty.awardForOrder(userId, order);
   return order;
 }
 
