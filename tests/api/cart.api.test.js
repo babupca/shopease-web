@@ -65,4 +65,8 @@ describe('Cart API', () => {
     const res = await request(app).get('/api/cart').set(auth());
     expect(res.body).toMatchObject({ itemCount: 2, subtotal: 29.98 });
   });
+
+  test('[API-CART-012] a fractional quantity returns 400', async () => {
+    expect((await addToCart(app, token, 'P-1003', 2.5)).status).toBe(400);
+  });
 });

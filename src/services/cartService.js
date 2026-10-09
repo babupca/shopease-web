@@ -13,7 +13,7 @@ function rawCart(userId) {
 
 function validateQty(qty) {
   const max = config.cart.maxQtyPerItem;
-  if (typeof qty !== 'number' || Number.isNaN(qty) || qty < 1 || qty > max) {
+  if (!Number.isInteger(qty) || qty < 1 || qty > max) {
     throw new AppError(`Quantity must be between 1 and ${max}`, 400, 'INVALID_QUANTITY');
   }
 }

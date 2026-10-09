@@ -91,4 +91,8 @@ describe('Cart', () => {
     cart.addItem(U, 'P-1001', 1);
     expect(cart.getCart('U-2').items).toHaveLength(0);
   });
+
+  test('[UT-CART-021] rejects a fractional quantity', () => {
+    expect(() => cart.addItem(U, 'P-1003', 2.5)).toThrow(expect.objectContaining({ code: 'INVALID_QUANTITY' }));
+  });
 });
