@@ -81,6 +81,10 @@ paths:
     put: { summary: Update name or tax region, tags: [Profile], responses: { '200': { description: Profile }, '400': { $ref: '#/components/responses/Error' } } }
   /profile/addresses:
     post: { summary: Add an address, tags: [Profile], responses: { '201': { description: Address }, '400': { $ref: '#/components/responses/Error' } } }
+  /loyalty/balance:
+    get: { summary: Loyalty points balance and tier (feature flag loyaltyProgram), tags: [Loyalty], responses: { '200': { description: Balance }, '404': { $ref: '#/components/responses/Error' } } }
+  /loyalty/redeem:
+    post: { summary: Redeem points in multiples of 100 for store credit, tags: [Loyalty], responses: { '200': { description: Redeemed }, '400': { $ref: '#/components/responses/Error' }, '409': { $ref: '#/components/responses/Error' } } }
   /admin/orders:
     get: { summary: List all orders (admin), tags: [Admin], responses: { '200': { description: Orders }, '403': { $ref: '#/components/responses/Error' } } }
   /admin/orders/{id}/status:
