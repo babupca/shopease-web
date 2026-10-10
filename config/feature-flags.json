@@ -1,5 +1,5 @@
 {
-  "expressCheckout": false,
+  "expressCheckout": true,
   "loyaltyProgram": false,
   "guestCheckout": false
 }
