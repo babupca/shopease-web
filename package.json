@@ -13,12 +13,12 @@
     "test:report": "jest --json --outputFile=reports/jest-results.json"
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.21.2"
   },
   "devDependencies": {
     "@playwright/test": "^1.47.0",
     "jest": "^29.7.0",
-    "supertest": "^7.0.0"
+    "supertest": "^7.1.0"
   },
   "jest": {
     "testEnvironment": "node",
