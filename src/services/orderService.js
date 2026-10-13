@@ -2,15 +2,17 @@
 const store = require('../data/store');
 const { AppError } = require('../errors');
 
-const STATUSES = ['PENDING', 'PAID', 'PAYMENT_FAILED', 'SHIPPED', 'DELIVERED', 'CANCELLED'];
+const STATUSES = ['PENDING', 'PAID', 'PAYMENT_FAILED', 'SHIPPED', 'DELIVERED', 'CANCELLED', 'RETURNED'];
+const RETURN_WINDOW_DAYS = 30;
 
 const TRANSITIONS = {
   PENDING: ['PAID', 'PAYMENT_FAILED', 'CANCELLED'],
   PAID: ['SHIPPED', 'CANCELLED'],
   PAYMENT_FAILED: ['CANCELLED'],
   SHIPPED: ['DELIVERED'],
-  DELIVERED: [],
-  CANCELLED: []
+  DELIVERED: ['RETURNED'],
+  CANCELLED: [],
+  RETURNED: []
 };
 
 function createOrder({ userId, items, subtotal, discount, shipping, tax, total, region, promoCode }) {
@@ -76,4 +78,16 @@ function cancelOrder(id, user) {
   return updateStatus(id, 'CANCELLED');
 }
 
-module.exports = { createOrder, getOrder, listOrders, listAllOrders, updateStatus, cancelOrder, STATUSES, TRANSITIONS };
+function requestReturn(id, user, reason, now = new Date()) {
+  const order = getOrder(id, user);
+  if (order.status !== 'DELIVERED') throw new AppError('Only delivered orders can be returned', 409, 'NOT_RETURNABLE');
+  if (!reason || !String(reason).trim()) throw new AppError('A return reason is required', 400, 'VALIDATION_ERROR');
+  const delivered = [...order.history].reverse().find((h) => h.status === 'DELIVERED');
+  const ageDays = (now - new Date(delivered.at)) / 86400000;
+  if (ageDays > RETURN_WINDOW_DAYS) throw new AppError('Return window has closed', 409, 'RETURN_WINDOW_EXPIRED');
+  order.returnReason = String(reason).trim();
+  order.returnedAt = now.toISOString();
+  return updateStatus(id, 'RETURNED');
+}
+
+module.exports = { createOrder, getOrder, listOrders, listAllOrders, updateStatus, cancelOrder, requestReturn, STATUSES, TRANSITIONS, RETURN_WINDOW_DAYS };

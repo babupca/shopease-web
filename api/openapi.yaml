@@ -76,6 +76,8 @@ paths:
     get: { summary: Get my order, tags: [Orders], parameters: [{ name: id, in: path, required: true, schema: { type: string } }], responses: { '200': { description: Order, content: { application/json: { schema: { $ref: '#/components/schemas/Order' } } } }, '404': { $ref: '#/components/responses/Error' } } }
   /orders/{id}/cancel:
     post: { summary: Cancel a PENDING or PAID order, tags: [Orders], parameters: [{ name: id, in: path, required: true, schema: { type: string } }], responses: { '200': { description: Cancelled order }, '409': { $ref: '#/components/responses/Error' } } }
+  /orders/{id}/return:
+    post: { summary: Return a DELIVERED order within 30 days, tags: [Orders], parameters: [{ name: id, in: path, required: true, schema: { type: string } }], responses: { '200': { description: Returned order }, '400': { $ref: '#/components/responses/Error' }, '409': { $ref: '#/components/responses/Error' } } }
   /profile:
     get: { summary: Get profile, tags: [Profile], responses: { '200': { description: Profile } } }
     put: { summary: Update name or tax region, tags: [Profile], responses: { '200': { description: Profile }, '400': { $ref: '#/components/responses/Error' } } }
@@ -122,7 +124,7 @@ components:
       required: [id, status, items, subtotal, tax, total]
       properties:
         id: { type: string }
-        status: { type: string, enum: [PENDING, PAID, PAYMENT_FAILED, SHIPPED, DELIVERED, CANCELLED] }
+        status: { type: string, enum: [PENDING, PAID, PAYMENT_FAILED, SHIPPED, DELIVERED, CANCELLED, RETURNED] }
         items: { type: array, items: { type: object } }
         subtotal: { type: number }
         discount: { type: number }

@@ -96,4 +96,16 @@ describe('Orders', () => {
     orders.updateStatus(a.id, 'PAID');
     expect(orders.listAllOrders({ status: 'PAID' }).map((o) => o.id)).toEqual([a.id]);
   });
+
+  test('[UT-ORD-020] a delivered order can be returned with a reason', () => {
+    const o = sample();
+    ['PAID', 'SHIPPED', 'DELIVERED'].forEach((s) => orders.updateStatus(o.id, s));
+    expect(orders.requestReturn(o.id, ALICE, 'Wrong size').status).toBe('RETURNED');
+  });
+
+  test('[UT-ORD-021] an order that is not delivered cannot be returned', () => {
+    const o = sample();
+    orders.updateStatus(o.id, 'PAID');
+    expect(() => orders.requestReturn(o.id, ALICE, 'Changed mind')).toThrow(expect.objectContaining({ code: 'NOT_RETURNABLE' }));
+  });
 });

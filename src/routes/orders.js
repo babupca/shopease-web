@@ -43,5 +43,13 @@ router.post('/:id/cancel', (req, res, next) => {
   }
 });
 
+router.post('/:id/return', (req, res, next) => {
+  try {
+    res.json(toOrderResponse(orderService.requestReturn(req.params.id, req.user, req.body.reason)));
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;
 module.exports.toOrderResponse = toOrderResponse;
