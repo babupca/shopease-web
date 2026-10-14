@@ -36,6 +36,7 @@ function verify(token, now = Date.now()) {
     delete store.state.sessions[token];
     throw new AppError('Session expired', 401, 'SESSION_EXPIRED');
   }
+  session.expiresAt = now + config.auth.tokenTtlMinutes * 60 * 1000;
   return publicUser(store.state.users.find((u) => u.id === session.userId));
 }
 
