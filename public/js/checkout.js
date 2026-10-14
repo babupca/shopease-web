@@ -10,6 +10,7 @@ function formValues() {
 
 function showResult(text, ok) {
   const el = document.getElementById('checkout-result');
+  el.setAttribute('role', ok ? 'status' : 'alert');
   el.textContent = text;
   el.className = ok ? 'success' : 'error';
 }
