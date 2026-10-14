@@ -1,6 +1,6 @@
 {
   "app": { "name": "ShopEase", "port": 3000, "currency": "USD" },
-  "auth": { "tokenTtlMinutes": 60, "passwordMinLength": 8, "maxLoginAttempts": 5 },
+  "auth": { "tokenTtlMinutes": 480, "passwordMinLength": 8, "maxLoginAttempts": 10 },
   "cart": { "maxQtyPerItem": 10, "maxDistinctItems": 25 },
   "tax": {
     "defaultRegion": "US-CA",
