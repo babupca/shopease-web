@@ -1,4 +1,4 @@
 {
-  "payment": { "gatewayUrl": "https://sit.paygate.example/v2", "timeoutMs": 5000 },
+  "payment": { "gatewayUrl": "https://sit.paygate.example/v3", "timeoutMs": 8000 },
   "notifications": { "enabled": true, "fromAddress": "orders-sit@shopease.example" }
 }
