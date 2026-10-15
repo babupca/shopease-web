@@ -14,7 +14,7 @@ function toOrderResponse(order) {
     discount: order.discount,
     shipping: order.shipping,
     tax: order.tax,
-    total: order.total,
+    totalAmount: order.total,
     promoCode: order.promoCode,
     createdAt: order.createdAt
   };

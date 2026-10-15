@@ -22,7 +22,7 @@ describe('Orders API', () => {
   test('[API-ORD-002] GET /orders/:id returns the order with total', async () => {
     const res = await request(app).get(`/api/orders/${orderId}`).set(auth());
     expect(res.body).toMatchObject({ id: orderId, status: 'PAID' });
-    expect(typeof res.body.total).toBe('number');
+    expect(typeof res.body.totalAmount).toBe('number');
   });
 
   test('[API-ORD-003] another customer cannot read my order (404)', async () => {

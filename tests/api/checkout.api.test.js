@@ -31,7 +31,7 @@ describe('Checkout API', () => {
     await addToCart(app, token, 'P-1001', 1);
     const res = await placeOrder(app, token);
     expect(Object.keys(res.body).sort()).toEqual(
-      ['createdAt', 'discount', 'id', 'items', 'promoCode', 'shipping', 'status', 'subtotal', 'tax', 'total'].sort()
+      ['createdAt', 'discount', 'id', 'items', 'promoCode', 'shipping', 'status', 'subtotal', 'tax', 'totalAmount'].sort()
     );
   });
 
